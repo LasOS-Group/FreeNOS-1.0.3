@@ -41,11 +41,24 @@ Wait::Result Wait::exec()
     //declaring a variable of type proecss id 
     pid_t processID;
     int status;
+    bool inputValidation = false; 
     //saving the process id input by the user  
     processID =atoi(arguments().get("PID"));
     //call the waitpid to wait and pass in the process id 
     waitpid(processID, &status, 0); 
-
-    // Done
-    return Success;
+    for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
+    {
+        if(pid == processID)
+        {
+            inputValidation = true; 
+        }
+    }
+    if(inputValidation)
+    {
+        return Success; 
+    }
+    else
+    {
+        
+    }
 }
