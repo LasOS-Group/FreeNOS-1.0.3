@@ -44,26 +44,26 @@ Wait::Result Wait::exec()
     bool inputValidation = false; 
     //saving the process id input by the user  
     processID =atoi(arguments().get("PID"));
-    //call the waitpid to wait and pass in the process id 
     
+    //check the process ids available and if it matches to the input process id 
     for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
     {
         if(pid == processID)
         {
             inputValidation = true; 
+            //call the waitpid to wait and pass in the process id 
+            waitpid(processID, &status, 0); 
             break; 
         }
     }
-    //the process id is valid 
-    if(inputValidation)
-    {
-        waitpid(processID, &status, 0); 
-    }
-    else //the process id is not valid 
+    
+    //the process id is not valid 
+    if(!inputValidation)
     {
         ERROR("invalid Process ID '" << arguments().get("PID") << "'"); 
         return InvalidArgument; 
     }
+   
     //DONE 
     return Success; 
 }
