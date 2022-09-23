@@ -21,6 +21,7 @@
 #include <POSIXApplication.h>
 
 /**
+ * Similar to Sleep 
  * @addtogroup bin
  * @{
  */
