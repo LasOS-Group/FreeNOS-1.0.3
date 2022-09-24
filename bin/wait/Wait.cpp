@@ -42,6 +42,7 @@ Wait::Result Wait::exec()
     pid_t processID;
     int status;
     bool inputValidation = false; 
+    pid_t waited; 
     //saving the process id input by the user  
     processID =atoi(arguments().get("PID"));
     
@@ -52,7 +53,8 @@ Wait::Result Wait::exec()
         {
             inputValidation = true; 
             //call the waitpid to wait and pass in the process id 
-            waitpid(processID, &status, 0); 
+            //WAIT NOW 
+            waited = waitpid(processID, &status, 0); 
             break; 
         }
     }
@@ -60,8 +62,14 @@ Wait::Result Wait::exec()
     //the process id is not valid 
     if(!inputValidation)
     {
-        ERROR("invalid Process ID '" << arguments().get("PID") << "'"); 
+        ERROR("Invalid Process ID '" << arguments().get("PID") << "'"); 
         return InvalidArgument; 
+    }
+    //could not wait 
+    else if(processID != waited)
+    {
+        ERROR("Failed to sleep: " << strerror(errno));
+        return IOError;
     }
    
     //DONE 
