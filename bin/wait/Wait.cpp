@@ -62,13 +62,13 @@ Wait::Result Wait::exec()
     //the process id is not valid 
     if(!inputValidation)
     {
-        ERROR("Invalid Process ID '" << arguments().get("PID") << "'"); 
+        ERROR("Invalid Process ID: " << strerror(errno)); 
         return InvalidArgument; 
     }
     //could not wait 
     else if(processID != waited)
     {
-        ERROR("Failed to sleep: " << strerror(errno));
+        ERROR("Failed to wait: " << strerror(errno));
         return IOError;
     }
    
