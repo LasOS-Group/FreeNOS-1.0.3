@@ -21,6 +21,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <ProcessManager.h>
+#include <ProcessClient.h>
 #include <Process.h>
 #include <sys/wait.h>
 #include "Wait.h"
