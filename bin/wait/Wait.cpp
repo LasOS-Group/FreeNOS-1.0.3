@@ -39,10 +39,10 @@ Wait::~Wait()
 Wait::Result Wait::exec()
 {
     //declaring a variable of type proecss id 
-    pid_t processID;
+    ProcessID processID;
     int status;
     bool inputValidation = false; 
-    pid_t waited; 
+    
     //saving the process id input by the user  
     processID =atoi(arguments().get("PID"));
     
@@ -52,24 +52,19 @@ Wait::Result Wait::exec()
         if(pid == processID)
         {
             inputValidation = true; 
-            //call the waitpid to wait and pass in the process id 
-            //WAIT NOW 
-            waited = waitpid(processID, &status, 0); 
             break; 
         }
     }
+    
+    //call the waitpid to wait and pass in the process id 
+    //WAIT NOW 
+    waitpid(processID, &status, 0); 
     
     //the process id is not valid 
     if(!inputValidation)
     {
         ERROR("Invalid Process ID: " << strerror(errno)); 
         return InvalidArgument; 
-    }
-    //could not wait 
-    else if(processID != waited)
-    {
-        ERROR("Failed to wait: " << strerror(errno));
-        return IOError;
     }
    
     //DONE 
