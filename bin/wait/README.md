@@ -1,6 +1,6 @@
 WAIT Project
 
-Writing application named wait 
+Writing an application named wait 
 
 Group Members:
 	Serly Teymoorian
