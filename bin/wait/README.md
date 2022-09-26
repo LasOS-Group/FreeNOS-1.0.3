@@ -1,9 +1,8 @@
 WAIT Project
 
-Group Members:
-Serly Teymoorian 
-Linda Thao
-Anna Estrada
+Writing application named wait 
 
-Link to video:
-https://www.youtube.com/watch?v=igcGmLQkRl8
+Group Members:
+	Serly Teymoorian
+	Anna Estrada
+	Linda Thao
