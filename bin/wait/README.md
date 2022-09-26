@@ -5,6 +5,5 @@ Serly Teymoorian
 Linda Thao
 Anna Estrada
 
-GitHub Repository Link 
-
-Video Link 
+Link to video:
+https://www.youtube.com/watch?v=igcGmLQkRl8
