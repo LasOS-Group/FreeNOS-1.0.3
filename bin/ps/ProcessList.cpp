@@ -41,7 +41,7 @@ ProcessList::Result ProcessList::exec()
         out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
     }
     else if(arguments().get("priorityList"){
-        out << "ID PRIORITY  PARENT  USER GROUP STATUS     CMD\r\n";
+        out << "ID. PRIORITY  PARENT  USER GROUP STATUS     CMD\r\n";
         priorityUsed = true; 
     }
 
@@ -56,18 +56,6 @@ ProcessList::Result ProcessList::exec()
             //if the prioirty flag -l was entered then print the priority levels of all proccesses 
             if(priorityUsed) {
                 
-                DEBUG("PID " << pid << " state = " << *info.textState);
-
-                // Output a line
-                char line[128];
-                snprintf(line, sizeof(line),
-                        "%3d %7d %4d %5d %10s %32s\r\n",
-                         pid, info.kernelState.parent,
-                         0, 0, *info.textState, *info.command);
-                out << line;
-            }
-            //no priority level printed 
-            else {
                 DEBUG("PID " << pid << " state = " << *info.textState << " priority = " << info.kernelState.priority);
 
                 // Output a line
@@ -75,6 +63,18 @@ ProcessList::Result ProcessList::exec()
                 snprintf(line, sizeof(line),
                         "%3d %7d %4d %5d %10s %32s\r\n",
                          pid, info.kernelState.priority, info.kernelState.parent,
+                         0, 0, *info.textState, *info.command);
+                out << line;
+            }
+            //no priority level printed 
+            else {
+                
+                DEBUG("PID " << pid << " state = " << *info.textState);
+                // Output a line
+                char line[128];
+                snprintf(line, sizeof(line),
+                        "%3d %7d %4d %5d %10s %32s\r\n",
+                         pid, info.kernelState.parent,
                          0, 0, *info.textState, *info.command);
                 out << line;
             }
