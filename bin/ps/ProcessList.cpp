@@ -27,7 +27,7 @@ ProcessList::ProcessList(int argc, char **argv)
 {
     parser().setDescription("Output system process list");
     //we should register the flag -l 
-    parse().registerFlag('l', "priorityList", "Listing the priority level of each process!");
+    parser().registerFlag('l', "priorityList", "Listing the priority level of each process!");
 }
 
 ProcessList::Result ProcessList::exec()
