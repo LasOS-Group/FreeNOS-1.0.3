@@ -34,7 +34,7 @@ ProcessList::Result ProcessList::exec()
 {
     const ProcessClient process;
     String out;
-    boolean priorityUsed = false; 
+    bool priorityUsed = false; 
 
     // Print header
     if(arguments().getFlag().count == 0){
