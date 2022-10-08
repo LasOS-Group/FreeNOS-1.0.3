@@ -87,6 +87,8 @@ class Process
      * Destructor function.
      */
     virtual ~Process();
+  
+    int getPriority() const; 
 
     /**
      * Retrieve our ID number.
@@ -242,6 +244,8 @@ class Process
     void setParent(ProcessID id);
 
   protected:
+    
+    int m_priority; 
 
     /** Process Identifier */
     const ProcessID m_id;
