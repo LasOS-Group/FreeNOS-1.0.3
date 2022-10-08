@@ -62,6 +62,8 @@ ProcessOperation;
  */
 typedef struct ProcessInfo
 {
+    int priority; 
+    
     /** Process Identity number. Must be unique. */
     ProcessID id;
 
