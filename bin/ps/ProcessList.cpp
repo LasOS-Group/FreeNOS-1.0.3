@@ -37,12 +37,12 @@ ProcessList::Result ProcessList::exec()
     bool priorityUsed = false; 
 
     // Print header
-    if(arguments().getFlag().count == 0){
-        out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
-    }
-    else if(arguments().get("priorityList"){
-        out << "ID. PRIORITY  PARENT  USER GROUP STATUS     CMD\r\n";
+    if(arguments().get("priorityLevel")){
+        out << "ID  PRIORITY  PARENT  USER GROUP STATUS     CMD\r\n";
         priorityUsed = true; 
+    }
+    else {
+        out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
     }
 
     // Loop processes
@@ -53,23 +53,20 @@ ProcessList::Result ProcessList::exec()
         const ProcessClient::Result result = process.processInfo(pid, info);
         if (result == ProcessClient::Success)
         {
+             DEBUG("PID " << pid << " state = " << *info.textState << " priority = " << info.kernelState.priority);
+            
             //if the prioirty flag -l was entered then print the priority levels of all proccesses 
             if(priorityUsed) {
-                
-                DEBUG("PID " << pid << " state = " << *info.textState << " priority = " << info.kernelState.priority);
-
                 // Output a line
                 char line[128];
                 snprintf(line, sizeof(line),
-                        "%3d %7d %4d %5d %10s %32s\r\n",
+                        "%3d %6d %7d %4d %5d %10s %32s\r\n",
                          pid, info.kernelState.priority, info.kernelState.parent,
                          0, 0, *info.textState, *info.command);
                 out << line;
             }
             //no priority level printed 
-            else {
-                
-                DEBUG("PID " << pid << " state = " << *info.textState);
+            else {              
                 // Output a line
                 char line[128];
                 snprintf(line, sizeof(line),
