@@ -273,10 +273,9 @@ bool Process::operator==(Process *proc)
 }
 //added 
 Process::Result Process::setPriorityLevel(int priorityLevel){
-    if(priorityLevel >= 1 && priorityLevel <= 5) {
-        m_priority = priorityLevel;
-        return Success;
-    } else {
-        return InvalidArgument; 
-    }
+    if(priorityLevel < 1 && priorityLevel > 5) {
+        return InvalidArgument;
+    } 
+    m_priority = priorityLevel;
+    return Success; 
 }    
