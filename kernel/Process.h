@@ -152,6 +152,13 @@ class Process
     bool operator == (Process *proc);
 
   protected:
+    /**
+    * Set a new priority for a process 
+    * @param priorityLevel The new priority level
+    *
+    * return the result 
+    */
+    Result setPriorityLevel(int priorityLevel); 
 
     /**
      * Initialize the Process.
