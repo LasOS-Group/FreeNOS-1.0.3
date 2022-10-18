@@ -88,6 +88,11 @@ class Process
      */
     virtual ~Process();
   
+    /**
+     * Retrieve our priority level.
+     *
+     * @return Process priority level.
+     */
     int getPriority() const; 
 
     /**
@@ -152,6 +157,7 @@ class Process
     bool operator == (Process *proc);
 
   protected:
+  
     /**
     * Set a new priority for a process 
     * @param priorityLevel The new priority level
@@ -251,7 +257,7 @@ class Process
     void setParent(ProcessID id);
 
   protected:
-    
+    /**Process priority level*/
     int m_priority; 
 
     /** Process Identifier */
