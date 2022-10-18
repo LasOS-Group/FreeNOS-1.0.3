@@ -113,6 +113,16 @@ class ProcessManager
      * @return Result code
      */
     Result wait(Process *proc);
+  
+    /**
+     * Change the priority of the current process. 
+     *
+     * @param pid Process ID
+     * @param processPriority the priority level of the given process 
+     *
+     * @return Result either Success or Failed 
+     */
+    Result setPriority(const ProcessID pid, int processPriority); 
 
     /**
      * Remove given Process from the Scheduler
