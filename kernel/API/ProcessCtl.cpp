@@ -48,6 +48,13 @@ API::Result ProcessCtlHandler(const ProcessID procID,
     // Handle request
     switch (action)
     {
+    //added the case for ReniceSetPriority    
+    case ReniceSetPriority:
+        if(procs->setPriority(prociD, addr) == ProcessManager::Success){
+          return API::Success;
+        } else {
+          return API::InvalidArgument; 
+        }
     case Spawn:
         proc = procs->create(addr, map);
         if (!proc)
@@ -187,6 +194,7 @@ Log & operator << (Log &log, ProcessOperation op)
 {
     switch (op)
     {
+      case ReniceSetPriority: log.append("ReniceSetPriority"); break; 
         case Spawn:     log.append("Spawn"); break;
         case KillPID:   log.append("KillPID"); break;
         case GetPID:    log.append("GetPID"); break;

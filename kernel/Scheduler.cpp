@@ -26,7 +26,13 @@ Scheduler::Scheduler()
 
 Size Scheduler::count() const
 {
-    return m_queue.count();
+    int count; 
+    
+    for(int i = 0; i < 5; ++i)
+    {
+        count = count + m_queue[i].count(); 
+    }
+    return count;
 }
 
 Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
@@ -37,7 +43,7 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
 
-    m_queue.push(proc);
+    m_queue[proc->getPriority() - 1].push(proc);
     return Success;
 }
 
@@ -49,32 +55,38 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
 
-    Size count = m_queue.count();
+    Size count = m_queue[proc->getPriority() - 1].count();
 
     // Traverse the Queue to remove the Process
     for (Size i = 0; i < count; i++)
     {
-        Process *p = m_queue.pop();
+        Process *p = m_queue[proc->getPriority() - 1].pop();
 
         if (p == proc)
             return Success;
         else
-            m_queue.push(p);
+            m_queue[proc->getPriority() - 1].push(p);
     }
 
     FATAL("process ID " << proc->getID() << " is not in the schedule");
     return InvalidArgument;
 }
 
+//ML SCHEDULING 
 Process * Scheduler::select()
 {
-    if (m_queue.count() > 0)
+    //going through 5 queues 
+    //IMPLEMENTED AS ML  
+    for(int index = 4; index >= 0; --index)
     {
-        Process *p = m_queue.pop();
-        m_queue.push(p);
+        if (!m_queue[index].isEmpty())
+        {
+            Process *p = m_queue[index].pop();
+            m_queue[index].push(p);
 
-        return p;
+            return p;
+        }
     }
-
+    
     return (Process *) NULL;
 }

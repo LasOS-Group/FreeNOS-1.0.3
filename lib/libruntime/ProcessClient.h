@@ -70,6 +70,13 @@ class ProcessClient
     Info;
 
   public:
+    
+    /**
+     * Set the priority level of a process
+     *
+     * @rnothing returned 
+     */
+    void setPriority(const ProcessID pid, int processPriority); 
 
     /**
      * Get current process identifier
