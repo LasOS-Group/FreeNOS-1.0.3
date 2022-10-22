@@ -53,10 +53,4 @@ Renice::Result Renice::exec()
 
         setPriority(pid, priority);
     }
-    
-    
-    
-
-    
 }
-Footer
