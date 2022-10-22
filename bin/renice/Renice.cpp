@@ -35,6 +35,8 @@ Renice::Renice(int argc, char **argv)
 
 }
 
+Renice::~Renice(){}
+
 Renice::Result Renice::exec()
 {
     
