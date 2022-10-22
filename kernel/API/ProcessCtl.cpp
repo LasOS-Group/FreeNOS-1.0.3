@@ -50,7 +50,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
     {
     //added the case for ReniceSetPriority    
     case ReniceSetPriority:
-        if(procs->setPriority(prociD, addr) == ProcessManager::Success){
+        if(procs->setPriority(procID, addr) == ProcessManager::Success){
           return API::Success;
         } else {
           return API::InvalidArgument; 
@@ -194,7 +194,7 @@ Log & operator << (Log &log, ProcessOperation op)
 {
     switch (op)
     {
-      case ReniceSetPriority: log.append("ReniceSetPriority"); break; 
+        case ReniceSetPriority: log.append("ReniceSetPriority"); break; 
         case Spawn:     log.append("Spawn"); break;
         case KillPID:   log.append("KillPID"); break;
         case GetPID:    log.append("GetPID"); break;
