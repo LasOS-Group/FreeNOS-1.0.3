@@ -16,6 +16,9 @@
  */
 
 #include <Types.h>
+#include <ProcessManager.h>
+#include <Process.h>
+#include <stdlib.h>
 #include <Macros.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -25,7 +28,7 @@
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Alters the nice value of running process");
+    parser().setDescription("Alters the priority level of a process!!");
     //we should register the flag -n
     parser().registerFlag('n', "renice", "Specifies the number to add to the renice value of the process");
 
@@ -40,18 +43,20 @@ Renice::~Renice(){}
 Renice::Result Renice::exec()
 {
     
-    //if the flag is inputted 
-    if(arguments().getFlags().count() > 0){
+    //if the flag n is inputted 
+    if(arguments().getFlags().get("renice")){
         //create an object of processClient 
         ProcessClient process;
 
         //save the processid and prioritylevel inputted into corresponding variables 
-        ProcessID pid = arguement.get("processID");
-        int priority = arguement.get("priorityLevel");
+        ProcessID pid = atoi(arguements().get("processID"));
+        int priority = atoi(arguements.get("priorityLevel"));
 
         //call setPriority to set the priority of the process by passing the process ID and the priority level 
         process.setPriority(pid, priority);
         
         return Success; 
     }
+    
+    return InvalidArgument; 
 }
