@@ -37,7 +37,7 @@ ProcessList::Result ProcessList::exec()
     bool priorityUsed = false; 
 
     // Print header
-    if(arguments().get("priorityLevel")){
+    if(arguments().get("priorityList")){
         out << "ID  PRIORITY  PARENT  USER GROUP STATUS     CMD\r\n";
         priorityUsed = true; 
     }
