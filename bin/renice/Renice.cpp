@@ -56,7 +56,7 @@ Renice::Result Renice::exec()
     
     
     
-Write(pid, "(process id)", "new priority", priority);
+
     
 }
 Footer
