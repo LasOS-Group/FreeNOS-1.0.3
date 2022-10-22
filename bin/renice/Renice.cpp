@@ -41,16 +41,17 @@ Renice::Result Renice::exec()
 {
     
     //if the flag is inputted 
-    if(renice(arguement.get("renice"), priority, ID){
+    if(arguments().getFlags().count() > 0){
         //create an object of processClient 
-        const ProcessClient process;
+        ProcessClient process;
 
         //save the processid and prioritylevel inputted into corresponding variables 
         ProcessID pid = arguement.get("processID");
         int priority = arguement.get("priorityLevel");
 
         //call setPriority to set the priority of the process by passing the process ID and the priority level 
-
-        setPriority(pid, priority);
+        process.setPriority(pid, priority);
+        
+        return Success; 
     }
 }
