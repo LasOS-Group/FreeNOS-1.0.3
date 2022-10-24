@@ -54,27 +54,24 @@ ProcessList::Result ProcessList::exec()
         if (result == ProcessClient::Success)
         {
              DEBUG("PID " << pid << " state = " << *info.textState << " priority = " << info.kernelState.priority);
+            // Output a line
+            char line[128];
             
             //if the prioirty flag -l was entered then print the priority levels of all proccesses 
             if(priorityUsed) {
-                // Output a line
-                char line[128];
                 snprintf(line, sizeof(line),
                         "%3d %6d %7d %4d %5d %10s %32s\r\n",
                          pid, info.kernelState.priority, info.kernelState.parent,
                          0, 0, *info.textState, *info.command);
-                out << line;
             }
             //no priority level printed 
             else {              
-                // Output a line
-                char line[128];
                 snprintf(line, sizeof(line),
                         "%3d %7d %4d %5d %10s %32s\r\n",
                          pid, info.kernelState.parent,
                          0, 0, *info.textState, *info.command);
-                out << line;
             }
+            out << line;
         }
     }
 

@@ -26,7 +26,7 @@
 Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &map)
     : m_id(id), m_map(map), m_shares(id)
 {
-    m_priority      = 3; 
+    m_priority      = 4; 
     m_state         = Stopped;
     m_parent        = 0;
     m_waitId        = 0;
@@ -271,3 +271,11 @@ bool Process::operator==(Process *proc)
 {
     return proc->getID() == m_id;
 }
+//added 
+Process::Result Process::setPriorityLevel(int priorityLevel){
+    if(priorityLevel < 1 && priorityLevel > 5) {
+        return InvalidArgument;
+    } 
+    m_priority = priorityLevel;
+    return Success; 
+}    

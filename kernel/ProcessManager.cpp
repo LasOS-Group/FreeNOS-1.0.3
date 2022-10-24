@@ -421,3 +421,19 @@ ProcessManager::Result ProcessManager::dequeueProcess(Process *proc, const bool 
 
     return Success;
 }
+
+//setPriority
+ProcessManager::Result ProcessManager::setPriority(const ProcessID pid, int processPriority) {
+    //pointer to the process from the given process id 
+    Process * proc = get(pid); 
+    
+    dequeueProcess(proc, true);
+    if(proc->setPriorityLevel(processPriority) == Success){
+        enqueueProcess(proc, false);
+        schedule();
+        return Success;
+    } else {
+        enqueueProcess(proc, false);
+        return InvalidArgument;
+    }
+}

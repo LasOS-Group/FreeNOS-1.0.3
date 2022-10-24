@@ -36,6 +36,7 @@
  */
 typedef enum ProcessOperation
 {
+    ReniceSetPriority = -2,
     Spawn = 0,
     KillPID,
     GetPID,
